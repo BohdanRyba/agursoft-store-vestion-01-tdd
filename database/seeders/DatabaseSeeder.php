@@ -3,13 +3,25 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\CategoryModule\Contracts\Http\Services\SliderServiceInterface;
+use App\Models\Category;
 use App\Models\Concert;
 use App\Models\Slider;
+use App\Models\SliderItem;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
+
+    private SliderServiceInterface $categoryService;
+
+    public function __construct(SliderServiceInterface $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     /**
      * Seed the application's database.
      *
@@ -20,9 +32,22 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BaseUserSeeder::class,
         ]);
+
+        foreach ($this->categoryService->getDefaultCategories() as $category) {
+            Category::factory()->create($category);
+        }
+
+        $slider = Slider::factory()->create(['title'=> 'homepage']);
+
+        $slides = SliderItem::factory(3)->create(['slider_id' => $slider->id]);
+
         Concert::factory(100)->create();
         User::factory(10)->create();
         $user = User::whereEmail('user@user.com')->first();
 //        Slider::factory(5)->belongsToUser($user->id)->create();
+        $this->call([
+            ProductSeeder::class,
+        ]);
+
     }
 }

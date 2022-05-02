@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('category_id')->nullable();
             $table->string('title');
             $table->text('icon')->nullable();
+            $table->text('icon_color')->nullable();
             $table->text('image_path')->nullable();
             $table->boolean('is_image_active')->default(false);
             $table->boolean('is_icon_active')->default(true);

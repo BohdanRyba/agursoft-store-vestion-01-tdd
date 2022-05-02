@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
  */
 class CategoryFactory extends Factory
 {
+
     /**
      * Define the model's default state.
      *
@@ -36,6 +37,14 @@ class CategoryFactory extends Factory
                                             <path d="M11.5 6.026a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1 1a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm2 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1 1a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-7-2.5h1v3h-1v-3z"/>
                                             <path d="M3.5 6.526h3v1h-3v-1zM3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .258.966l-1.932.518a.5.5 0 0 1-.612-.354zm9.976 0a.5.5 0 0 0-.353-.613l-1.932-.518a.5.5 0 1 0-.259.966l1.932.518a.5.5 0 0 0 .612-.354z"/>
                                         </svg>'
+            ]),
+            'icon_color' => $this->faker->randomElement([
+                '',
+                'text-danger',
+                'text-warning',
+                'text-info',
+                'text-primary',
+                'text-success',
             ]),
             'is_image_active' => $imageActive = $this->faker->boolean(),
             'is_icon_active' => !$imageActive,
