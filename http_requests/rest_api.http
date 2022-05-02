@@ -1,0 +1,3 @@
+GET https://app.laravel.test/api/user
+Accept: application/json
+Authorization: Bearer 1|Eri0rEDeAlONVM2LjXDAzyBjHFGjcPKtAsNQH7H9
