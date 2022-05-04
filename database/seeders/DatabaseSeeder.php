@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\CategoryModule\Contracts\Http\Services\SliderServiceInterface;
+use App\CategoryModule\Http\Services\CategoryService;
 use App\Models\Category;
 use App\Models\Concert;
 use App\Models\Slider;
@@ -15,9 +15,9 @@ use Illuminate\Support\Str;
 class DatabaseSeeder extends Seeder
 {
 
-    private SliderServiceInterface $categoryService;
+    private CategoryService $categoryService;
 
-    public function __construct(SliderServiceInterface $categoryService)
+    public function __construct(CategoryService $categoryService)
     {
         $this->categoryService = $categoryService;
     }

@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Billing\FakePaymentGateway;
+use App\Billing\LiqPay\Contracts\LiqpayPaymentInterface;
+use App\Billing\LiqPay\Contracts\LiqpayServiceInterface;
+use App\Billing\LiqPay\Http\Services\LiqpayService;
+use App\Billing\LiqPay\V2\LiqPay;
 use App\Billing\PaymentGateway;
 use App\CategoryModule\Contracts\Http\Services\CategoryServiceInterface;
 use App\CategoryModule\Http\Services\CategoryService;
@@ -32,5 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->instance(PaymentGateway::class, FakePaymentGateway::class);
         $this->app->bind(CategoryServiceInterface::class, CategoryService::class);
         $this->app->bind(SliderServiceInterface::class, SliderService::class);
+        $this->app->bind(LiqpayPaymentInterface::class, LiqPay::class);
+        $this->app->bind(LiqpayServiceInterface::class, LiqpayService::class);
     }
 }

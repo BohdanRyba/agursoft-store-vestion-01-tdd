@@ -20,9 +20,14 @@ return new class extends Migration
             $table->unsignedInteger('product_id')->nullable();
             $table->string('slug')->unique();
             $table->string('name');
+            $table->string('picture');
             $table->string('short_description')->nullable();
+            $table->text('properties');
             $table->text('description')->nullable();
             $table->integer('price');
+            $table->integer('quantity')->nullable();
+            $table->integer('discount_percent')->nullable();
+            $table->integer('discount_amount')->nullable();
             $table->integer('type_id')->nullable();
             $table->integer('price_dollar')->nullable();
             $table->integer('price_euro')->nullable();
