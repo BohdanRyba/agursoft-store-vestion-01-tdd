@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-//            $table->foreignId('user_id')
-//                ->nullable()
-//                ->constrained()
-//                ->onUpdate('cascade')
-//                ->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

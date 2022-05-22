@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\CategoryModule\Http\Services\CategoryService;
-use App\Models\Category;
+use App\CategoryModule\Models\Category;
 use App\Models\Concert;
 use App\Models\Slider;
 use App\Models\SliderItem;

@@ -2,7 +2,7 @@
 
 namespace App\Nova;
 
-use App\Models\Category;
+use App\CategoryModule\Models\Category;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;

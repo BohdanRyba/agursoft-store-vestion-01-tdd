@@ -12,6 +12,8 @@ use App\CategoryModule\Contracts\Http\Services\CategoryServiceInterface;
 use App\CategoryModule\Http\Services\CategoryService;
 use App\SliderModule\Contracts\Http\Services\SliderServiceInterface;
 use App\SliderModule\Http\Services\SliderService;
+use Illuminate\Database\SQLiteConnection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (DB::connection() instanceof SQLiteConnection) {
+            DB::statement(DB::raw('PRAGMA foreign_keys=1'));
+        }
+
         $this->app->instance(PaymentGateway::class, FakePaymentGateway::class);
         $this->app->bind(CategoryServiceInterface::class, CategoryService::class);
         $this->app->bind(SliderServiceInterface::class, SliderService::class);

@@ -1,10 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Nova;
 
 use App\Models\Product;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 
@@ -42,10 +46,10 @@ class ProductResource extends Resource
     public function fields(Request $request): array
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
+            ID::make()->sortable(),
+            Number::make(__('Category Id'), 'category_id'),
             Slug::make(__('Slug'), 'slug'),
             Text::make(__('Product name'), 'name'),
-            Text::make(__('picture'), 'picture'),
             Text::make(__('properties'), 'properties'),
             Text::make(__('short_description'), 'short_description'),
             Text::make(__('description'), 'description'),
@@ -58,6 +62,23 @@ class ProductResource extends Resource
             Text::make(__('price_euro'), 'price_euro'),
             Text::make(__('old_price'), 'old_price'),
 
+            HasMany::make('ProductOptionResource', 'options'),
+
+            Images::make('Front image', 'picture')
+            ->conversionOnIndexView('thumb')
+            ->rules('required'),
+
+            Images::make('Back image', 'back_picture')
+            ->conversionOnIndexView('thumb')
+            ->rules('required'),
+
+            Images::make('Images', 'gallery')
+            ->conversionOnDetailView('thumb')
+            ->conversionOnIndexView('thumb')
+            ->conversionOnForm('thumb')
+            ->fullSize()
+            ->rules('required')
+            ->singleImageRules('dimensions:min_width=100')
         ];
     }
 
